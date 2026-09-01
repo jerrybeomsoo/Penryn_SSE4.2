@@ -1,8 +1,9 @@
 # Penryn_SSE4.2
-Proof-of-concept UEFI VMX Hypervisor for running Windows 11 24H2+ on Penryn CPUs without SSE4.2 and POPCNT instructions.
+A Proof-of-concept UEFI VMX hypervisor that virtualizes every logical processor, and traps the invalid‑opcode exception (`#UD`, vector 6). <br>
+When Windows 24H2+ executes an SSE4.2/POPCNT instruction on a CPU that lacks it, the `#UD` becomes a VM‑exit; the hypervisor decodes it, computes the result in software (GPR and XMM state), advances `RIP`, and `VMRESUME`s. <br>
 
 > [!WARNING]
-> Provided as-is. The full sourcecode is currently not disclosed to the public.
+> Provided as-is. Source code is currently not disclosed to the public.
 
 ## Status : <br>
 Currently can boot Windows 11 25H2 into the "desktop" on a Intel Core 2 Duo T9900 machine, with CPU core count restricted to 1.<br>
